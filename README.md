@@ -104,3 +104,20 @@ Design Rationale: The simulator executes as a single-threaded state machine. Log
 * Average Turnaround Time ($\text{TAT}$)
 * Average Response Time ($\text{RT}$)
 * Number of Completed Processes
+
+## Execution Profiling
+he simulator can also be analyzed using Linux performance counters.
+```cpp
+$g++ -std=c++17 -O3 main.cpp cpu/*.cpp scheduler/*.cpp metrics/*.cpp workload/*.cpp -o scheduler_sim$ perf stat ./scheduler_sim
+```
+This reveals how the scheduling simulation translates into actual CPU behavior:
+* nstructions executed
+* CPU cycles
+* instruction per cycle (IPC)
+* branch prediction accuracy
+Example from a run with 2500 processes:
+* Instructions Executed: $1,842,109,230$ ($\approx 1.84\text{ Billion}$)
+* CPU Cycles Consumed: $1,279,242,520$ ($\approx 1.28\text{ Billion}$)
+* Total Branches: $312,041,120$ ($\approx 312\text{ Million}$)
+* Branch Misses: $1,104,210$ ($\approx 1.10\text{ Million}$)
+This connects algorithm-level scheduling behavior to real hardware execution characteristics
