@@ -79,10 +79,16 @@ The simulator logically models an $N$-core hardware environment within a single 
 std::vector<Process*> running(cores_);
 ```
 For a 4-core configuration (cores_ = 4), active execution slots are mapped sequentially:
-* running[0] $\rightarrow$ Core 0running[1] $\rightarrow$ Core 1running[2] $\rightarrow$ Core 2running[3] $\rightarrow$ Core 3
+* running[0] $\rightarrow$ Core 0
+* running[1] $\rightarrow$ Core 1
+* running[2] $\rightarrow$ Core 2
+* running[3] $\rightarrow$ Core 3
+
+ ``cpp
 for (int core = 0; core < cores_; ++core) {
     // 1. Dispatch process from Ready Queue to IDLE core
     // 2. Execute process for 1 time unit
     // 3. Update remaining burst time & core state
     // 4. Handle process termination or preemption triggers
 }
+``
