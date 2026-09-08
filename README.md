@@ -1,48 +1,39 @@
-# Multi-Core CPU Scheduling Simulator
+# Multi-Core CPU Scheduler Simulator (C++)
 
-A high-performance C++ simulator designed to model, analyze, and visualize preemptive and non-preemptive Priority CPU scheduling algorithms across multi-core architectures.
-
----
-
-## 📌 Project Overview
-This project simulates how Operating System kernels schedule processes across multiple CPU cores. It provides a modular framework to evaluate execution behavior, process preemption, and calculate critical OS telemetry metrics in real time.
-
-## ✨ Key Features
-* **Multi-Core Scheduling:** Supports execution across $N$ dynamic CPU cores.
-* **Preemptive & Non-Preemptive Modes:** Simulates real-time process preemption based on priority weights.
-* **OS Telemetry & Performance Analytics:** Computes key performance indicators:
-  * Turnaround Time (TAT)
-  * Waiting Time (WT)
-  * Response Time (RT)
-  * CPU Utilization (%)
-  * System Throughput
-* **Gantt Chart Visualization:** Generates tick-by-tick visual timelines of core utilization and process assignment.
-* **Decoupled Architecture:** Clean separation between scheduling logic, hardware core management, telemetry, and CLI interface.
-
----
-
-## 🛠️ Tech Stack
-* **Language:** C++ (C++11 / C++17)
-* **Build Tool:** `g++` / CMake
-* **Version Control:** Git & GitHub
-
----
-
-## ⚙️ How It Works (Workflow)
-
-1. **Process Ingestion:** Processes enter with assigned `Arrival Time`, `Burst Time`, and `Priority`.
-2. **Ready Queue Management:** Unassigned ready processes are organized into a priority queue.
-3. **Core Allocation & Preemption:**
-   * **Non-Preemptive:** Idle cores pull the highest-priority process.
-   * **Preemptive:** Active cores evaluate running tasks against higher-priority incoming processes at each clock tick ($t \to t+1$).
-4. **Telemetry Calculation:** Once all processes complete, performance metrics are derived using standard OS formulas.
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-Make sure you have `g++` compiler installed.
+A deterministic, event-driven discrete-time CPU scheduling simulator built in C++17. Models multi-core CPU scheduling policies across synthetic and trace-driven workloads, complete with hardware-level profiling via Linux `perf`.
 
 ```bash
-g++ --version
+$ g++ -std=c++17 -O3 main.cpp cpu/*.cpp scheduler/*.cpp metrics/*.cpp workload/*.cpp -o scheduler_sim
+$ perf stat ./scheduler_sim
+
+Select Scheduling Algorithm:
+1. First-Come, First-Served (FCFS)
+2. Shortest Job First (SJF)
+3. Shortest Remaining Time First (SRTF)
+4. Round Robin (RR)
+5. Preemptive & Non-Preemptive Priority
+
+Choice: 5
+Enter Cores [1-16]: 4
+Enter Workload Size: 2500
+
+[+] Simulation Complete.
+=========================================================
+  Algorithm            : Priority (Preemptive)
+  Configured Cores     : 4
+  Processed Tasks      : 2500
+  Avg Waiting Time     : 412.38 ms
+  Avg Turnaround Time  : 438.12 ms
+  Avg Response Time    : 18.05 ms
+  Core Utilization     : 98.42%
+=========================================================
+
+ Performance counter stats for './scheduler_sim':
+
+       210.45 msec task-clock                #    0.992 CPUs utilized
+        1,280,491 cycles                     #    3.210 GHz
+    1,842,109,230 instructions               #    1.44  insn per cycle
+      312,041,120 branches                   #  148.28 M/sec
+        1,104,210 branch-misses              #    0.35% of all branches
+
+       0.212048122 seconds time elapsed
