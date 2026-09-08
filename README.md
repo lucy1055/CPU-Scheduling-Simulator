@@ -70,3 +70,19 @@ The simulator models a multi-core CPU scheduler using a **discrete time-step sim
 4. **State Update:** Remaining burst times and process state structures are updated in memory.
 5. **Preemption Handling:** Preemptive schedulers evaluate active tasks on cores, returning preempted processes back to the `Ready Queue` if a higher-priority task arrives.
 6. **Completion Telemetry:** Upon task completion, metrics such as Waiting Time ($\text{WT}$), Turnaround Time ($\text{TAT}$), and Response Time ($\text{RT}$) are recorded.
+
+## ⚙️ Multi-Core Simulation Model
+
+The simulator logically models an $N$-core hardware environment within a single deterministic thread. Each physical CPU core is represented as an execution slot inside a contiguous container:
+
+```cpp
+std::vector<Process*> running(cores_);
+```
+For a 4-core configuration (cores_ = 4), active execution slots are mapped sequentially:
+* running[0] $\rightarrow$ Core 0running[1] $\rightarrow$ Core 1running[2] $\rightarrow$ Core 2running[3] $\rightarrow$ Core 3
+for (int core = 0; core < cores_; ++core) {
+    // 1. Dispatch process from Ready Queue to IDLE core
+    // 2. Execute process for 1 time unit
+    // 3. Update remaining burst time & core state
+    // 4. Handle process termination or preemption triggers
+}
