@@ -111,11 +111,13 @@ he simulator can also be analyzed using Linux performance counters.
 $g++ -std=c++17 -O3 main.cpp cpu/*.cpp scheduler/*.cpp metrics/*.cpp workload/*.cpp -o scheduler_sim$ perf stat ./scheduler_sim
 ```
 This reveals how the scheduling simulation translates into actual CPU behavior:
-* nstructions executed
+* instructions executed
 * CPU cycles
 * instruction per cycle (IPC)
 * branch prediction accuracy
+  
 Example from a run with 2500 processes:
+
 * Instructions Executed: $1,842,109,230$ ($\approx 1.84\text{ Billion}$)
 * CPU Cycles Consumed: $1,279,242,520$ ($\approx 1.28\text{ Billion}$)
 * Total Branches: $312,041,120$ ($\approx 312\text{ Million}$)
