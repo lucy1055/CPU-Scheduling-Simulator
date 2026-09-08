@@ -92,3 +92,5 @@ for (int core = 0; core < cores_; ++core) {
     // 4. Handle process termination or preemption triggers
 }
 ```
+Design Rationale: The simulator executes as a single-threaded state machine. Logically modeling multi-core execution—rather than spawning native kernel threads (std::thread) with mutex synchronization—eliminates non-deterministic OS scheduling noise. This guarantees 100% reproducible benchmarks across all scheduling policies.
+
