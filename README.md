@@ -60,3 +60,13 @@ My goal is to observe :
 * **Preemption Overhead:** How preemptive scheduling impacts **tail latency** versus average waiting time.
 * **Hardware Footprint:** How algorithmic decisions translate to physical CPU metrics using Linux `perf`—such as **IPC (Instructions Per Cycle)**, branch prediction accuracy, and $L_1$ cache hits.
   
+## Core Idea of the Simulator
+
+The simulator models a multi-core CPU scheduler using a **discrete time-step simulation engine**. At every simulated clock tick ($\Delta t = 1$), the event loop executes the following sequence:
+
+1. **Task Arrival:** Newly arrived processes are transferred to the `Ready Queue`.
+2. **Core Allocation:** Each available CPU core selects a process according to the active scheduling policy.
+3. **Execution Tick:** Active processes execute on assigned cores for one unit of burst time.
+4. **State Update:** Remaining burst times and process state structures are updated in memory.
+5. **Preemption Handling:** Preemptive schedulers evaluate active tasks on cores, returning preempted processes back to the `Ready Queue` if a higher-priority task arrives.
+6. **Completion Telemetry:** Upon task completion, metrics such as Waiting Time ($\text{WT}$), Turnaround Time ($\text{TAT}$), and Response Time ($\text{RT}$) are recorded.
