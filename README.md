@@ -30,10 +30,23 @@ Enter Workload Size: 2500
 
  Performance counter stats for './scheduler_sim':
 
-       210.45 msec task-clock                #    0.992 CPUs utilized
-        1,280,491 cycles                     #    3.210 GHz
-    1,842,109,230 instructions               #    1.44  insn per cycle
-      312,041,120 branches                   #  148.28 M/sec
-        1,104,210 branch-misses              #    0.35% of all branches
 
-       0.212048122 seconds time elapsed
+        msec task-clock : 210.45 msec                #  0.992 CPUs utilized
+        context-switches : 14                        #  66.52 /sec
+        cpu-migrations  : 1                          #  4.75 /sec
+        page-faults : 92                             #  437.16 /sec
+        cycles : 1,280,491                           #  3.210 GHz
+        stalled-cycles-frontend : 184,210            #  14.39% frontend cycles idle
+        stalled-cycles-backend : 112,040             #  8.75% backend cycles idle
+        instructions : 1,842,109,230                 #  1.44  insn per cycle
+                                                     #  0.16  stalled cycles per insn
+        branches : 312,041,120                       #  148.28 M/sec
+        branch-misses : 1,104,210                    #  0.35% of all branches
+        L1-dcache-loads : 512,104,892                #  243.33 M/sec
+        L1-dcache-load-misses: 4,120,810             #  0.80% of all L1-dcache accesses
+        LLC-loads : 210,400                          #  1.00 M/sec
+        LLC-load-misses : 12,410                     #  5.90% of all LL-cache accesses
+
+       elapsed time : 0.212048122 seconds
+       user cpu time : 0.198210000 seconds
+       sys cpu time : 0.012104000 seconds
