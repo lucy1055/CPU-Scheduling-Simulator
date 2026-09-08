@@ -84,11 +84,11 @@ For a 4-core configuration (cores_ = 4), active execution slots are mapped seque
 * running[2] $\rightarrow$ Core 2
 * running[3] $\rightarrow$ Core 3
 
- ``cpp
+ ```cpp
 for (int core = 0; core < cores_; ++core) {
     // 1. Dispatch process from Ready Queue to IDLE core
     // 2. Execute process for 1 time unit
     // 3. Update remaining burst time & core state
     // 4. Handle process termination or preemption triggers
 }
-``
+```
