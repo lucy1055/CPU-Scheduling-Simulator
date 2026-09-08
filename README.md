@@ -95,7 +95,7 @@ for (int core = 0; core < cores_; ++core) {
 Design Rationale: The simulator executes as a single-threaded state machine. Logically modeling multi-core execution—rather than spawning native kernel threads (std::thread) with mutex synchronization—eliminates non-deterministic OS scheduling noise. This guarantees 100% reproducible benchmarks across all scheduling policies.
 
 ## OS/Hardware-Level Metrics (recorded using Linux perf and OS kernel counters)
-* Time & Execution Profiling: user cpu, sys cpu, elapsed time, task-clock.
+* Time & Execution Profiling: user cpu time, sys cpu time, elapsed time, task-clock.
 * OS Kernel Events: context-switches, cpu-migrations, page-faults
 * Microarchitectural Hardware Counters: instructions & cycles, stalled-cycles-frontend / backend, branches & branch-misses, L1-dcache-load-misses & LLC-load-misses
 
