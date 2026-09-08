@@ -71,7 +71,7 @@ The simulator models a multi-core CPU scheduler using a **discrete time-step sim
 5. **Preemption Handling:** Preemptive schedulers evaluate active tasks on cores, returning preempted processes back to the `Ready Queue` if a higher-priority task arrives.
 6. **Completion Telemetry:** Upon task completion, metrics such as Waiting Time ($\text{WT}$), Turnaround Time ($\text{TAT}$), and Response Time ($\text{RT}$) are recorded.
 
-## ⚙️ Multi-Core Simulation Model
+## Multi-Core Simulation Model
 
 The simulator logically models an $N$-core hardware environment within a single deterministic thread. Each physical CPU core is represented as an execution slot inside a contiguous container:
 
@@ -94,3 +94,13 @@ for (int core = 0; core < cores_; ++core) {
 ```
 Design Rationale: The simulator executes as a single-threaded state machine. Logically modeling multi-core execution—rather than spawning native kernel threads (std::thread) with mutex synchronization—eliminates non-deterministic OS scheduling noise. This guarantees 100% reproducible benchmarks across all scheduling policies.
 
+## OS/Hardware-Level Metrics (recorded using Linux perf and OS kernel counters)
+* Time & Execution Profiling: user cpu, sys cpu, elapsed time, task-clock.
+* OS Kernel Events: context-switches, cpu-migrations, page-faults
+* Microarchitectural Hardware Counters: instructions & cycles, stalled-cycles-frontend / backend, branches & branch-misses, L1-dcache-load-misses & LLC-load-misses
+
+## Internal Simulation Metrics (Calculated by C++ Engine)
+* Average Waiting Time ($\text{WT}$)
+* Average Turnaround Time ($\text{TAT}$)
+* Average Response Time ($\text{RT}$)
+* Number of Completed Processes
