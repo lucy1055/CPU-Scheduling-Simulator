@@ -51,13 +51,4 @@ Enter Workload Size: 2500
        user cpu time : 0.198210000 seconds
        sys cpu time : 0.012104000 seconds
 
-=========================================================
 
-## 🎯 Motivation & Design Rationale
-
-Operating system textbooks explain scheduling policies like FCFS, SJF, SRTF, Round Robin, and Priority scheduling using static examples (4–5 processes on a single core). While these toy problems explain basic mechanics, they fail to build practical intuition for real-world systems engineering.
-
-### Why I Built This Simulator
-* **Queue Behavior Under Contention:** Observe how ready queues evolve when thousands of processes compete across multiple CPU cores.
-* **Preemption Overhead vs. Latency:** Measure how fine-grained preemption impacts tail latency ($P_{99}$) versus average turnaround time.
-* **Hardware-Level Footprint:** Profile execution using Linux `perf` to connect high-level algorithms to Instructions Per Cycle (IPC) and cache efficiency.
