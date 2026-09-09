@@ -124,17 +124,7 @@ Example from a run with 2500 processes:
   
 This connects algorithm-level scheduling behavior to real hardware execution characteristics
 
-## 🛠️ Build and Run
-
-### Prerequisites
-* **Compiler:** `g++` (GCC 7+) or `clang++` with C++17 support
-* **Build Tool:** `make` (optional)
-* **Profiling Tool:** Linux `perf` (optional, for hardware performance telemetry)
-
----
-
-### 1. Compilation
-
+## Build and Run
 Compile all core modules using C++17 with `-O3` optimizations for high performance:
 
 ```bash
@@ -148,4 +138,6 @@ To measure hardware performance counters (cycles, IPC, cache misses, branch misp
 ```cpp
 perf stat -e task-clock,cycles,instructions,branches,branch-misses,L1-dcache-load-misses ./scheduler_sim
 ```
+## Project Goal
 
+To build a deterministic, discrete-time multi-core CPU scheduling simulator in C++17 that evaluates algorithm behavior under high-concurrency workloads. It bridges theoretical OS scheduling policies with real-world systems engineering by capturing both process-level queue telemetry and microarchitectural hardware performance via Linux `perf`.
