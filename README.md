@@ -118,8 +118,34 @@ This reveals how the scheduling simulation translates into actual CPU behavior:
   
 Example from a run with 2500 processes:
 * Instructions Executed: 1.84 Billion
-* CPU Cycles Consumed: 1.28 Billion)
+* CPU Cycles Consumed: 1.28 Billion
 * Instructions Per Cycle (IPC): 1.44
 * Branch Misprediction Rate: 0.35% (1.10M misses out of 312M branches)
   
 This connects algorithm-level scheduling behavior to real hardware execution characteristics
+
+## 🛠️ Build and Run
+
+### Prerequisites
+* **Compiler:** `g++` (GCC 7+) or `clang++` with C++17 support
+* **Build Tool:** `make` (optional)
+* **Profiling Tool:** Linux `perf` (optional, for hardware performance telemetry)
+
+---
+
+### 1. Compilation
+
+Compile all core modules using C++17 with `-O3` optimizations for high performance:
+
+```bash
+g++ -std=c++17 -O3 main.cpp cpu/*.cpp scheduler/*.cpp metrics/*.cpp workload/*.cpp -o scheduler_sim
+```
+Run the binary to launch the interactive CLI simulator:
+```cpp
+./scheduler_sim
+```
+To measure hardware performance counters (cycles, IPC, cache misses, branch mispredictions) on Linux:
+```cpp
+perf stat -e task-clock,cycles,instructions,branches,branch-misses,L1-dcache-load-misses ./scheduler_sim
+```
+
