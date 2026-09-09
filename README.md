@@ -140,4 +140,4 @@ perf stat -e task-clock,cycles,instructions,branches,branch-misses,L1-dcache-loa
 ```
 ## Project Goal
 
-To build a deterministic, discrete-time multi-core CPU scheduling simulator in C++17 that evaluates algorithm behavior under high-concurrency workloads. It bridges theoretical OS scheduling policies with real-world systems engineering by capturing both process-level queue telemetry and microarchitectural hardware performance via Linux `perf`.
+The purpose of this project is to build practical intuition about operating system scheduling policies and understand how high-level algorithmic decisions interact with real system-level performance.
