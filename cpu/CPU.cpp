@@ -1,3 +1,4 @@
+// Multi-Core CPU implementation
 #include "CPU.h"
 
 void CPU::assignProcess(Process* p) {
