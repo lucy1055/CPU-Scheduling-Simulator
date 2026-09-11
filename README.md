@@ -1,4 +1,5 @@
 # Multi-Core CPU Scheduler Simulator (C++)
+# Multi-Core CPU Scheduler Simulator (C++17)
 
 A deterministic, event-driven discrete-time CPU scheduling simulator built in C++17. Models multi-core CPU scheduling policies across synthetic and trace-driven workloads, complete with hardware-level profiling via Linux `perf`.
 
