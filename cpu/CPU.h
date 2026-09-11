@@ -1,3 +1,4 @@
+//multi core multiplication
 #ifndef CPU_H
 #define CPU_H
 
